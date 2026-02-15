@@ -29,7 +29,7 @@ export default function App() {
 
     const checkAdmin = (currentUser) => {
         // Liste des emails admin (à personnaliser)
-        const adminEmails = ['admin@vitatrack.com', 'gmgbxgames@gmail.com'];
+        const adminEmails = ['admin@ideaofgenius.com];
         setIsAdmin(currentUser && adminEmails.includes(currentUser.email));
     };
 
