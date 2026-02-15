@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=/app">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirection - VitaTrack</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF7ED 0%, #FFF1F2 50%, #FFEDD5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .loader {
+            text-align: center;
+        }
+        .logo {
+            font-size: 80px;
+            animation: float 2s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        p {
+            color: #C2410C;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="logo">🌸</div>
+        <p>Redirection vers votre espace...</p>
+    </div>
+    
+    <script>
+        // Redirection immédiate vers l'app React
+        window.location.replace('/app');
+    </script>
+</body>
+</html>

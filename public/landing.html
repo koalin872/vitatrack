@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaTrack - Reprenez le contrôle de votre bien-être en 10 minutes par jour</title>
+    <meta name="description" content="L'application gratuite qui calcule automatiquement vos besoins nutritionnels et suit vos progrès. Conçue pour les mamans actives qui manquent de temps.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF7ED 0%, #FFF1F2 50%, #FFEDD5 100%);
+            color: #1F2937;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(251, 146, 60, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .emoji-hero {
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #EA580C 0%, #F97316 50%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #C2410C;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #78716C;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #EA580C, #F97316);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(234, 88, 12, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .cta-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(234, 88, 12, 0.4);
+        }
+        
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            text-align: center;
+        }
+        
+        .trust-item .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #F97316, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .trust-item .label {
+            color: #78716C;
+            font-size: 0.9rem;
+        }
+        
+        /* Problem Section */
+        .problem-section {
+            background: white;
+            padding: 100px 20px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #EA580C, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(251, 146, 60, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(234, 88, 12, 0.15);
+        }
+        
+        .problem-card .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .problem-card h3 {
+            color: #C2410C;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .problem-card p {
+            color: #78716C;
+            line-height: 1.6;
+        }
+        
+        .solution-box {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid #FBBF24;
+        }
+        
+        .solution-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #92400E;
+            margin-bottom: 20px;
+        }
+        
+        .solution-box p {
+            font-size: 1.3rem;
+            color: #78350F;
+            line-height: 1.8;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 237, 213, 0.5));
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #F97316, #EC4899);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(234, 88, 12, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: #EA580C;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: #57534E;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .feature-benefit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 20px;
+            background: white;
+        }
+        
+        .steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+        
+        .step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+            transform: translateX(50px);
+        }
+        
+        .step-number {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #F97316, #EC4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 1.8rem;
+            color: #EA580C;
+            margin-bottom: 15px;
+        }
+        
+        .step-content p {
+            color: #57534E;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: #FED7AA;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-text {
+            color: #57534E;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #F97316, #EC4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .author-info h4 {
+            color: #EA580C;
+            font-weight: 600;
+        }
+        
+        .author-info p {
+            color: #78716C;
+            font-size: 0.9rem;
+        }
+        
+        .stars {
+            color: #FBBF24;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #EA580C, #EC4899);
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 30px;
+        }
+        
+        .cta-section p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-white {
+            display: inline-block;
+            background: white;
+            color: #EA580C;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-white:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* FAQ */
+        .faq-section {
+            padding: 100px 20px;
+            background: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            padding: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #C2410C;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: linear-gradient(135deg, #FED7AA, #FDBA74);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.8rem;
+            color: #F97316;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .faq-answer.active {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 25px;
+            color: #57534E;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1F2937;
+            color: white;
+            padding: 60px 20px 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #F97316, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #F97316;
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(249, 115, 22, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: #F97316;
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 40px 20px;
+            }
+            
+            .emoji-hero {
+                font-size: 60px;
+            }
+            
+            .problem-section,
+            .features-section,
+            .how-it-works,
+            .testimonials-section,
+            .faq-section,
+            .cta-section {
+                padding: 60px 20px;
+            }
+            
+            .step {
+                flex-direction: column !important;
+                text-align: center;
+            }
+            
+            .trust-indicators {
+                gap: 20px;
+            }
+            
+            .solution-box {
+                padding: 30px 20px;
+            }
+            
+            .cta-primary,
+            .cta-white {
+                padding: 18px 35px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: #F97316;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="emoji-hero">🌸</div>
+            <h1>Reprenez le contrôle de votre bien-être sans calculs compliqués</h1>
+            <p class="subtitle">L'application qui fait tout le travail à votre place</p>
+            <p class="hero-description">
+                Fini les heures perdues à calculer vos macros. VitaTrack calcule automatiquement votre métabolisme basal, vos besoins nutritionnels et suit vos progrès — le tout en 10 minutes par jour.
+            </p>
+            <a href="/login" class="cta-primary">
+                Commencer gratuitement 🚀
+            </a>
+            <br>
+            <div class="free-badge">✨ 100% Gratuit • Sans publicité • Données protégées</div>
+            
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <div class="number">10min</div>
+                    <div class="label">par jour suffisent</div>
+                </div>
+                <div class="trust-item">
+                    <div class="number">0€</div>
+                    <div class="label">Totalement gratuit</div>
+                </div>
+                <div class="trust-item">
+                    <div class="number">100%</div>
+                    <div class="label">Conforme RGPD</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <h2 class="section-title">Vous vous reconnaissez ?</h2>
+        <div class="problems-grid">
+            <div class="problem-card fade-in">
+                <div class="emoji">😰</div>
+                <h3>Les calculs vous découragent</h3>
+                <p>Entre le métabolisme basal, l'IMC, les macros... vous ne savez plus où donner de la tête. Les formules complexes vous font perdre un temps précieux.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="emoji">⏰</div>
+                <h3>Vous manquez de temps</h3>
+                <p>Entre votre travail, votre enfant et la maison, vous avez à peine 10 minutes pour vous occuper de votre santé. Les apps compliquées vous épuisent.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="emoji">📉</div>
+                <h3>Difficile de voir vos progrès</h3>
+                <p>Vous vous pesez chaque semaine mais vous ne voyez pas l'évolution globale. Vous avez besoin de graphiques clairs pour rester motivée.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="emoji">🤔</div>
+                <h3>Les apps sont trop génériques</h3>
+                <p>Vous voulez des recommandations personnalisées selon votre âge, votre métabolisme et votre niveau d'activité — pas un plan standard.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="emoji">🔐</div>
+                <h3>Vos données sont mal protégées</h3>
+                <p>Vous vous inquiétez de la confidentialité de vos informations de santé. Les apps étrangères ne respectent pas toujours le RGPD.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="emoji">🎯</div>
+                <h3>Perdre ces derniers kilos après bébé</h3>
+                <p>Depuis votre grossesse, vous voulez retrouver votre poids de forme. Mais entre fatigue et manque de temps, c'est compliqué.</p>
+            </div>
+        </div>
+        
+        <div class="solution-box fade-in">
+            <h2>VitaTrack fait tout ça pour vous ✨</h2>
+            <p>
+                Une application intelligente qui calcule automatiquement vos besoins, suit vos progrès et vous motive — sans vous prendre la tête. Le tout en 10 minutes par jour, gratuitement.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title">Tout ce dont vous avez besoin, rien de superflu</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🧮</div>
+                <h3>Calculs automatiques</h3>
+                <p>VitaTrack calcule votre métabolisme basal (formule Mifflin-St Jeor), votre IMC et vos besoins en macronutriments. Plus besoin de sortir la calculatrice !</p>
+                <div class="feature-benefit">✓ Formules scientifiques validées</div>
+                <div class="feature-benefit">✓ Mise à jour automatique selon vos progrès</div>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📊</div>
+                <h3>Suivi visuel de vos progrès</h3>
+                <p>Graphiques interactifs pour voir l'évolution de votre poids, mensurations (taille, hanches, cuisses) et biorhythme sur plusieurs mois.</p>
+                <div class="feature-benefit">✓ Tendances claires et motivantes</div>
+                <div class="feature-benefit">✓ Export CSV pour votre médecin</div>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎯</div>
+                <h3>Personnalisation intelligente</h3>
+                <p>Recommandations adaptées à votre âge, sexe, taille, poids, niveau d'activité et objectifs. VitaTrack s'adapte à VOUS, pas l'inverse.</p>
+                <div class="feature-benefit">✓ Ajustement automatique des macros</div>
+                <div class="feature-benefit">✓ Objectifs réalistes et atteignables</div>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🌊</div>
+                <h3>Suivi du biorhythme</h3>
+                <p>Suivez votre sommeil, humeur, énergie et stress quotidiens. Comprenez comment votre corps réagit pour optimiser vos efforts.</p>
+                <div class="feature-benefit">✓ Analyse scientifique de vos cycles</div>
+                <div class="feature-benefit">✓ Conseils personnalisés</div>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🏆</div>
+                <h3>Gamification motivante</h3>
+                <p>Gagnez des points, maintenez votre série de jours consécutifs, et déverrouillez des badges. Sans pub intrusive ni pression.</p>
+                <div class="feature-benefit">✓ Système de récompenses</div>
+                <div class="feature-benefit">✓ Motivation douce et positive</div>
+            </div>
+            
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔐</div>
+                <h3>Confidentialité garantie</h3>
+                <p>Vos données de santé restent PRIVÉES. Conformité RGPD stricte, hébergement français, aucun partage avec des tiers.</p>
+                <div class="feature-benefit">✓ Chiffrement de bout en bout</div>
+                <div class="feature-benefit">✓ Vous gardez le contrôle</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2 class="section-title">Comment ça marche ?</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Créez votre profil en 2 minutes</h3>
+                    <p>Entrez vos informations de base : âge, taille, poids, sexe, niveau d'activité et objectif. VitaTrack calcule instantanément votre métabolisme basal et vos besoins nutritionnels.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Suivez vos mesures chaque semaine</h3>
+                    <p>Une fois par semaine, prenez 5 minutes pour enregistrer votre poids et vos mensurations. VitaTrack crée automatiquement des graphiques d'évolution clairs et motivants.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Consultez votre tableau de bord quotidien</h3>
+                    <p>Chaque jour, notez votre biorhythme (sommeil, énergie, humeur) en 2 minutes. VitaTrack ajuste ses recommandations et vous motive avec des points et des badges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <h2 class="section-title">Elles ont repris le contrôle</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                    "Enfin une app qui ne me fait pas perdre mon temps ! Les calculs sont automatiques, l'interface est belle et j'adore voir mes progrès en graphiques. J'ai perdu 3 kg en 2 mois sans stress."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <h4>Sophie, 34 ans</h4>
+                        <p>Maman de 2 enfants, Cadre RH</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                    "Je cherchais une app française qui respecte mes données. VitaTrack est parfaite : conforme RGPD, pas de pub, et surtout les calculs de macros sont automatiques. Ça change tout !"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <h4>Marie, 38 ans</h4>
+                        <p>Chef de projet digital</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                    "Après ma grossesse, j'avais du mal à retrouver mon poids de forme. VitaTrack m'a aidée à comprendre mon métabolisme et à suivre mes progrès. Le système de points me motive chaque jour !"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <h4>Camille, 32 ans</h4>
+                        <p>Consultante, Maman d'un bébé</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <h2 class="section-title">Questions fréquentes</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Est-ce vraiment gratuit ? Pas de frais cachés ?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Oui, VitaTrack est 100% gratuit, sans pub et sans achat intégré. Notre mission est de rendre le suivi de santé accessible à tous. Vos données ne sont jamais vendues à des tiers.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Mes données sont-elles vraiment protégées ?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Absolument. VitaTrack est conforme RGPD, hébergé en France, avec chiffrement de bout en bout. Vous gardez le contrôle total : vous pouvez exporter ou supprimer vos données à tout moment.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Combien de temps ça prend par jour ?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Maximum 10 minutes par jour. 2 minutes pour noter votre biorhythme quotidien, et 5 minutes par semaine pour vos mesures. VitaTrack fait tous les calculs automatiquement.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Les calculs sont-ils fiables ?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Oui ! VitaTrack utilise les formules scientifiques validées : Mifflin-St Jeor pour le métabolisme basal, calcul standard de l'IMC, et recommandations nutritionnelles de l'ANSES. Tout est transparent.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Puis-je synchroniser mes appareils connectés ?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        La synchronisation avec Google Fit et Apple Health est prévue pour la prochaine version. Pour l'instant, vous pouvez saisir manuellement vos données en quelques secondes.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Ça marche sur Android et iOS ?
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        VitaTrack est une application web qui fonctionne sur tous les navigateurs (Chrome, Safari, Firefox). Accessible depuis votre smartphone, tablette ou ordinateur. Pas besoin de télécharger une app.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Prête à reprendre le contrôle ?</h2>
+        <p>Rejoignez les centaines de femmes qui ont déjà transformé leur bien-être avec VitaTrack</p>
+        <a href="/login" class="cta-white">
+            Commencer gratuitement maintenant →
+        </a>
+        <div style="margin-top: 30px; opacity: 0.9;">
+            ✨ Sans engagement • Sans carte bancaire • Sans publicité
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">VitaTrack</div>
+            <p style="color: #D1D5DB; max-width: 600px; margin: 0 auto 30px;">
+                L'application française qui calcule automatiquement vos besoins nutritionnels et suit vos progrès — en 10 minutes par jour.
+            </p>
+            
+            <div class="footer-links">
+                <a href="/confidentialite.html">Confidentialité</a>
+                <a href="/cgu.html">Conditions d'utilisation</a>
+                <a href="/rgpd.html">RGPD</a>
+            </div>
+            
+            <div class="footer-legal" style="color: #9CA3AF; font-size: 0.85rem; margin: 30px 0; line-height: 1.8;">
+                <p><strong>WEEVDONE</strong> - SARL au capital de 300 € - SIREN: 811 915 263</p>
+                <p>9 Rue de Condé Bureau 3, 33000 Bordeaux, France</p>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 VitaTrack by WEEVDONE. Tous droits réservés.</p>
+                <p style="margin-top: 10px;">Fait avec 💕 en France 🇫🇷</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer pour les animations au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observer tous les éléments avec fade-in
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Observer les steps
+        document.querySelectorAll('.step').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // Fermer toutes les autres FAQ
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Toggle la FAQ cliquée
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Animation du scroll indicator
+        window.addEventListener('scroll', () => {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator && window.scrollY > 100) {
+                scrollIndicator.style.opacity = '0';
+            } else if (scrollIndicator) {
+                scrollIndicator.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>
